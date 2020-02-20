@@ -14,6 +14,7 @@
 
 #include "performance_test/ros2/node.hpp"
 #include "performance_test/ros2/events_logger.hpp"
+#include "static_executor/executors/static_single_threaded_executor.hpp"
 
 namespace performance_test {
 
@@ -59,8 +60,8 @@ private:
 
   std::vector<std::shared_ptr<Node>> _nodes;
 
-  rclcpp::executor::Executor::SharedPtr _executor;
-  std::vector<rclcpp::executors::SingleThreadedExecutor::SharedPtr> _executors_vec;
+  rclcpp::executors::StaticSingleThreadedExecutor::SharedPtr _executor;
+  std::vector<rclcpp::executors::StaticSingleThreadedExecutor::SharedPtr> _executors_vec;
 
 
   std::shared_ptr<EventsLogger> _events_logger;

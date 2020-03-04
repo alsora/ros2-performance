@@ -18,7 +18,7 @@ performance_test::System::System(int executor_id)
 {
     //TODO here implement also multi thread executor, or maybe allow user to pass its custom executor
     if (executor_id == 1){
-        _executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+        _executor = std::make_shared<rclcpp::executors::StaticSingleThreadedExecutor>();
     }
     else{
         _executor = nullptr;
@@ -86,7 +86,7 @@ void performance_test::System::spin(int duration_sec, bool wait_for_discovery)
     else{
         // Create a different executor for each node
         for (const auto& n : _nodes){
-            auto ex = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+            auto ex = std::make_shared<rclcpp::executors::StaticSingleThreadedExecutor>();
             ex->add_node(n);
             // Spin each executor in a different thread
             std::thread a([=]() { ex->spin(); });
